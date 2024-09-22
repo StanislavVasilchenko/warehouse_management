@@ -12,6 +12,10 @@ class ProductCreate(ProductBase):
     pass
 
 
+class ProductUpdate(ProductBase):
+    pass
+
+
 class ProductOut(ProductBase):
     id: int
 
