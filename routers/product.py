@@ -6,7 +6,7 @@ from shemas.product import ProductOut, ProductCreate, ProductUpdate
 from configs.db_config import get_db
 from crud import product as product_crud
 
-router = APIRouter(prefix="/products", tags=["product"])
+router = APIRouter(prefix="/products", tags=["Products"])
 
 
 @router.post('/', response_model=ProductOut, summary="Create a product")
