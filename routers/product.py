@@ -33,3 +33,11 @@ async def update_product(product_id: int, product: ProductUpdate, db: Session = 
     if prod_db is None:
         raise HTTPException(status_code=404, detail=f"Product with id {product_id} not found")
     return prod_db
+
+
+@router.delete('/{id}', response_model=ProductOut, summary="Delete a product by id")
+async def delete_product(product_id: int, db: Session = Depends(get_db)):
+    prod_db = await product_crud.delete_product(db, product_id)
+    if prod_db is None:
+        raise HTTPException(status_code=404, detail=f"Product with id {product_id} not found")
+    return prod_db
