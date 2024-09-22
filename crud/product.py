@@ -27,3 +27,11 @@ async def product_update(db: Session, product: ProductUpdate, product_id: int):
         db.commit()
         db.refresh(product_db)
         return product_db
+
+
+async def delete_product(db: Session, product_id: int):
+    product_db = db.query(Product).get(int(product_id))
+    if product_db:
+        db.delete(product_db)
+        db.commit()
+        return product_db
