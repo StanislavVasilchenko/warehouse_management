@@ -9,3 +9,7 @@ async def create_product(db: Session, product: ProductCreate):
     db.commit()
     db.refresh(product)
     return product
+
+
+async def get_all_products(db: Session):
+    return db.query(Product).all()
