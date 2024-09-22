@@ -10,4 +10,5 @@ app.include_router(product_router)
 async def startup():
     from configs.db_config import engine, Base
     from models.product import Product  # noqa
+    from models.order import Order, OrderItem  # noqa
     Base.metadata.create_all(bind=engine)
