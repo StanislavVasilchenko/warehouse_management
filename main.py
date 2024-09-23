@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from routers.product import router as product_router
+from routers.order import router as order_router
 
 app = FastAPI()
 
 app.include_router(product_router)
+app.include_router(order_router)
 
 
 @app.on_event("startup")
