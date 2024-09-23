@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from shemas.product import ProductOut, ProductCreate, ProductUpdate
+from sсhemas.product import ProductOut, ProductCreate, ProductUpdate
 from configs.db_config import get_db
 from crud import product as product_crud
 

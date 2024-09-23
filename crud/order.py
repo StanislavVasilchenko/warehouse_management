@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from models.product import Product
-from shemas.order import OrderItemCreate, OrderUpdate
+from sсhemas.order import OrderItemCreate, OrderUpdate
 from models.order import Order, OrderItem
 
 
