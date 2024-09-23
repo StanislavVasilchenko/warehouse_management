@@ -17,12 +17,12 @@ async def create_order(order: OrderItemCreate, db: Session = Depends(get_db)):
     return new_order
 
 
-@router.get("/", response_model=List[OrderOut])
+@router.get("/", response_model=List[OrderOut], summary="Get all orders")
 async def get_orders(db: Session = Depends(get_db)):
     return await order_crud.get_orders(db)
 
 
-@router.get("{order_id}", response_model=OrderOut)
+@router.get("{order_id}", response_model=OrderOut, summary="Get order by order_id")
 async def get_order(order_id: int, db: Session = Depends(get_db)):
     order_db = await order_crud.get_order_by_id(db, order_id)
     if order_db is None:
@@ -30,7 +30,7 @@ async def get_order(order_id: int, db: Session = Depends(get_db)):
     return order_db
 
 
-@router.patch("/{order_id}/status", response_model=OrderOut)
+@router.patch("/{order_id}/status", response_model=OrderOut, summary="Update order status by order_id")
 async def update_order(order_id: int, order: OrderUpdate, db: Session = Depends(get_db)):
     order_db = await order_crud.change_order_status(db, order_id, order)
     if order_db is None:
