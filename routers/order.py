@@ -13,7 +13,7 @@ router = APIRouter(prefix="/orders", tags=["Orders"])
 async def create_order(order: OrderItemCreate, db: Session = Depends(get_db)):
     new_order = await order_crud.create_order(db, order)
     if new_order is None:
-        raise HTTPException(status_code=404, detail=f"Product not found")
+        raise HTTPException(status_code=404, detail=f"Product not found or Product not enough ")
     return new_order
 
 
