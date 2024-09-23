@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from configs.db_config import get_db
-from shemas.order import OrderItemCreate, OrderItemOut, OrderOut, OrderUpdate
+from sсhemas.order import OrderItemCreate, OrderItemOut, OrderOut, OrderUpdate
 from crud import order as order_crud
 
 router = APIRouter(prefix="/orders", tags=["Orders"])
