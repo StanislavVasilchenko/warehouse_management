@@ -11,7 +11,7 @@ router = APIRouter(prefix="/products", tags=["Products"])
 
 @router.post('/', response_model=ProductOut, summary="Create a product")
 async def get_products(product: ProductCreate, db: Session = Depends(get_db)):
-    return await product_crud.create_product(db, product)
+    return await product_crud.create_product(product, db)
 
 
 @router.get('/', response_model=List[ProductOut], summary="Get all products")
