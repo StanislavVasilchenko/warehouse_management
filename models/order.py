@@ -7,9 +7,9 @@ from configs.db_config import Base
 
 
 class OrderSatus(EnumPy):
-    in_process = 'в процессе'
-    sent = "отправлен"
-    delivered = "доставлен"
+    in_process = 'in_process'
+    sent = "sent"
+    delivered = "delivered"
 
 
 class Order(Base):
@@ -17,6 +17,8 @@ class Order(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     date_creation = Column(DateTime, default=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), index=True)
     status = Column(Enum(OrderSatus), default=OrderSatus.in_process)
+
+    order_items = relationship("OrderItem", back_populates="orders")
 
 
 class OrderItem(Base):
