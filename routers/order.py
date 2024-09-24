@@ -22,7 +22,7 @@ async def get_orders(db: Session = Depends(get_db)):
     return await order_crud.get_orders(db)
 
 
-@router.get("{order_id}", response_model=OrderOut, summary="Get order by order_id")
+@router.get("/{order_id}", response_model=OrderOut, summary="Get order by order_id")
 async def get_order(order_id: int, db: Session = Depends(get_db)):
     order_db = await order_crud.get_order_by_id(db, order_id)
     if order_db is None:

@@ -1,37 +1,32 @@
 from sqlalchemy.orm import Session
 from sсhemas.product import ProductCreate, ProductUpdate
 from models.product import Product
+from repositories.products import ProductRepository
 
 
-async def create_product(db: Session, product: ProductCreate):
-    product = Product(**product.dict())
-    db.add(product)
-    db.commit()
-    db.refresh(product)
-    return product
+async def create_product(product: ProductCreate, db: Session) -> Product:
+    return ProductRepository(db).create(product)
 
 
 async def get_all_products(db: Session):
-    return db.query(Product).all()
+    return ProductRepository(db).get_products()
 
 
 async def get_product_by_id(db: Session, product_id: int):
-    return db.query(Product).get(int(product_id))
+    return ProductRepository(db).get_product(product_id)
 
 
 async def product_update(db: Session, product: ProductUpdate, product_id: int):
-    product_db = db.query(Product).get(int(product_id))
-    if product_db is not None:
-        for var, value in vars(product).items():
-            setattr(product_db, var, value) if value else None
-        db.commit()
-        db.refresh(product_db)
-        return product_db
+    repos = ProductRepository(db)
+    product_db = repos.get_product(product_id)
+    if product_db:
+        for key, value in vars(product).items():
+            setattr(product_db, key, value) if value else None
+        return repos.save(product_db)
 
 
 async def delete_product(db: Session, product_id: int):
-    product_db = db.query(Product).get(int(product_id))
+    repos = ProductRepository(db)
+    product_db = repos.get_product(product_id)
     if product_db:
-        db.delete(product_db)
-        db.commit()
-        return product_db
+        return repos.delete(product_db)
