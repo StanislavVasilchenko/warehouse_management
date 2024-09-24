@@ -45,6 +45,5 @@ class OrderItemRepository:
             order = OrdersRepository(self.db).create()
             order_item_db = self.order_item(**order_item.dict())
             order_item_db.order_id = order.id
-            self.save(order_item_db)
-            return self.save(order_item_db)
-        return self.save(self.order_item(**order_item.dict()))
+            return order_item_db
+        return self.order_item(**order_item.dict())
