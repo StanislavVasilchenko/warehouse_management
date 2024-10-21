@@ -13,7 +13,9 @@ router = APIRouter(prefix="/orders", tags=["Orders"])
 async def create_order(order: OrderItemCreate, db: Session = Depends(get_db)):
     new_order = await order_crud.create_order(db, order)
     if new_order is None:
-        raise HTTPException(status_code=404, detail=f"Product not found or Product not enough ")
+        raise HTTPException(
+            status_code=404, detail=f"Product not found or Product not enough "
+        )
     return new_order
 
 
@@ -30,8 +32,14 @@ async def get_order(order_id: int, db: Session = Depends(get_db)):
     return order_db
 
 
-@router.patch("/{order_id}/status", response_model=OrderOut, summary="Update order status by order_id")
-async def update_order(order_id: int, order: OrderUpdate, db: Session = Depends(get_db)):
+@router.patch(
+    "/{order_id}/status",
+    response_model=OrderOut,
+    summary="Update order status by order_id",
+)
+async def update_order(
+    order_id: int, order: OrderUpdate, db: Session = Depends(get_db)
+):
     order_db = await order_crud.change_order_status(db, order_id, order)
     if order_db is None:
         raise HTTPException(status_code=404, detail="Order not found")

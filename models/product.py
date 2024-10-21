@@ -5,7 +5,7 @@ from configs.db_config import Base
 
 
 class Product(Base):
-    __tablename__ = 'product'
+    __tablename__ = "product"
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, index=True)
     description = Column(Text)

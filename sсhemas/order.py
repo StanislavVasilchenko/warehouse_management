@@ -30,7 +30,7 @@ class OrderItemOut(OrderItemsBase):
 
 
 class OrderOut(OrderBase):
-    date_creation: datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    date_creation: datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     id: int
     order_items: List[OrderItemOut]
 
